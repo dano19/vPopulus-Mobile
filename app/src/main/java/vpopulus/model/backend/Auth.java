@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import vpopulus.mobile.AuthActivity;
 import vpopulus.mobile.HomeActivity;
+import vpopulus.model.entities.Citizen;
 import vpopulus.model.politics.Country;
 
 /**
@@ -111,7 +112,7 @@ class login extends AsyncTask<String, Integer, Boolean>
                 object = object.getJSONObject("result");
                 Cache.userID = object.getInt("user_id");
                 Cache.token = object.getString("token");
-                //Cache.citizen =
+                Cache.citizen = Citizen.parse(JSONParser.getFromUrl("http://newapi.vpopulus.net/api/citizen/getByToken/" + Cache.token));
                 return true;
             } else
                 return false;
