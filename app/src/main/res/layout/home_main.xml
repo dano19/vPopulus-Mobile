@@ -10,6 +10,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
         android:weightSum="1">
 
         <LinearLayout
@@ -23,9 +26,9 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_width="250px"
-                    android:layout_height="250px"
-                    android:id="@+id/imageView2"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:id="@+id/home_title_avatar"
                     android:background="#ff99ff6e" />
             </LinearLayout>
 
@@ -39,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
-                    android:id="@+id/textView8"
+                    android:id="@+id/home_title_name"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
@@ -50,14 +53,6 @@
                     android:id="@+id/textView8"
                     android:layout_gravity="center_horizontal" />
 
-                <ProgressBar
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="300px"
-                    android:layout_height="50px"
-                    android:id="@+id/progressBar"
-                    android:layout_gravity="center_horizontal"
-                    android:max="100"
-                    android:progress="30" />
 
             </LinearLayout>
         </LinearLayout>

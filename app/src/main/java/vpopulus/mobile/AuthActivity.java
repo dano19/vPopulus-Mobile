@@ -37,6 +37,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -339,9 +341,16 @@ public class AuthActivity extends ActionBarActivity implements ActionBar.TabList
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.auth_register, container, false);
 
-
+            final EditText[] texts = new EditText[4];
+            texts[0] = (EditText)rootView.findViewById(R.id.editText);
+            texts[1] = (EditText)rootView.findViewById(R.id.editText2);
+            texts[2] = (EditText)rootView.findViewById(R.id.editText3);
+            texts[3] = (EditText)rootView.findViewById(R.id.editText4);
             final Spinner country = (Spinner)rootView.findViewById(R.id.spinner1);
             final Spinner region = (Spinner)rootView.findViewById(R.id.spinner);
+            final RadioGroup mf = (RadioGroup)rootView.findViewById(R.id.mf);
+            final Button button = (Button)rootView.findViewById(R.id.button);
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, Country.getNames());
             country.setAdapter(adapter);
 
@@ -357,6 +366,14 @@ public class AuthActivity extends ActionBarActivity implements ActionBar.TabList
                     // your code here
                 }
 
+            });
+
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int sex = mf.getCheckedRadioButtonId();
+                    RadioButton radio = (RadioButton)rootView.findViewById(sex);
+                    Auth.register(rootView.getContext(), texts[0].getText().toString(), texts[1].getText().toString(), texts[2].getText().toString(), texts[3].getText().toString(), region.getSelectedItem().toString(), radio.getText().charAt(0));
+                }
             });
 
             return rootView;

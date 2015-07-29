@@ -6,6 +6,7 @@ import java.util.List;
 import vpopulus.model.entities.Citizen;
 import vpopulus.model.politics.Country;
 import vpopulus.model.politics.Region;
+import vpopulus.model.social.Notifications;
 
 /**
  * Created by Dano1_000 on 7/24/2015.
@@ -18,4 +19,5 @@ public class Cache {
 
     public static List<Country> countries = new ArrayList<Country>();
     public static List<Region> regions = new ArrayList<Region>();
+    public static List<Notifications> notifications = new ArrayList<Notifications>();
 }

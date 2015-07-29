@@ -31,9 +31,9 @@ public class Auth {
         new login(activity, username, password).execute();
     }
 
-    public static void register(Context activity, String username, String password, String password2, String email, String regionName)
+    public static void register(Context activity, String username, String password, String password2, String email, String regionName, char gender)
     {
-        new register(activity, username, password, password2, email, regionName).execute();
+        new register(activity, username, password, password2, email, regionName, gender).execute();
     }
 }
 
@@ -149,8 +149,9 @@ class register extends AsyncTask<String, Integer, Boolean>
     private String password2;
     private String email;
     private String regionName;
+    private char gender;
 
-    public register(Context c, String username, String password, String password2, String email, String regionName)
+    public register(Context c, String username, String password, String password2, String email, String regionName, char gender)
     {
         this.context = c;
         this.progress = new ProgressDialog(c);
@@ -159,6 +160,7 @@ class register extends AsyncTask<String, Integer, Boolean>
         this.password2 = password2;
         this.email = email;
         this.regionName = regionName;
+        this.gender = gender;
     }
 
     @Override
@@ -179,8 +181,7 @@ class register extends AsyncTask<String, Integer, Boolean>
                 break;
             }
 
-        String data = JSONParser.getFromUrl("");
-        // TODO: Add register feed to API and put link here. http://newapi.vpopulus.net/api/auth/register?username=" + username + "&password=" + password + "
+        String data = JSONParser.getFromUrl("http://newapi.vpopulus.net/api/auth/register?username=" + username + "&password=" + password + "&password2=" + password2 + "&email=" + email + "&regionID=" + regionID + "&gender=" + gender);
 
         try {
             JSONObject object = new JSONObject(data);

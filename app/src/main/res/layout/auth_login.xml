@@ -31,7 +31,8 @@
         android:hint="Username"
         android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="48dp"
+        android:text="admin" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -41,7 +42,8 @@
         android:id="@+id/editText6"
         android:hint="Password"
         android:layout_below="@+id/editText5"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="testing12345" />
 
     <CheckBox
         android:layout_width="wrap_content"

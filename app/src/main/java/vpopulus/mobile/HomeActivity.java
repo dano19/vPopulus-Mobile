@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import vpopulus.model.backend.Cache;
+import vpopulus.model.backend.DownloadImageTask;
 
 
 public class HomeActivity extends ActionBarActivity
@@ -139,11 +140,11 @@ public class HomeActivity extends ActionBarActivity
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.home_main, container, false);
 
-            TextView name = (TextView)rootView.findViewById(R.id.textView8);
-            name.setText(Cache.citizen.name);
+            TextView name = (TextView)rootView.findViewById(R.id.home_title_name);
+            name.setText(Cache.citizen.name.toString());
 
-            ImageView avatar = (ImageView)rootView.findViewById(R.id.imageView2);
-            //avatar.setImageURI("http://www.vpopulus.net/assets/others/avatars/citizen/7acef2b91ad8.jpg");
+            ImageView avatar = (ImageView)rootView.findViewById(R.id.home_title_avatar);
+           new DownloadImageTask(avatar).execute("http://www.vpopulus.net/assets/others/avatars/citizen/7acef2b91ad8.jpg");
 
             return rootView;
         }
