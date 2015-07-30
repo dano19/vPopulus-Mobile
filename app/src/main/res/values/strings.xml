@@ -11,13 +11,14 @@
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="title_section1">Home</string>
-    <string name="title_section2">Messages</string>
+    <string name="title_section2">Messages -TODO-</string>
     <string name="title_section3">Notifications</string>
-    <string name="title_section4">Market</string>
-    <string name="title_section5">Section 5</string>
+    <string name="title_section4">Inventory</string>
+    <string name="title_section5">Market -TODO-</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+    <string name="service_name">NotificationService</string>
 </resources>

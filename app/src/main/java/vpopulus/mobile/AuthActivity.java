@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -50,6 +52,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import vpopulus.Other.DisplayNotificationsService;
 import vpopulus.model.backend.Auth;
 import vpopulus.model.backend.Cache;
 import vpopulus.model.backend.JSONParser;
@@ -86,6 +89,15 @@ public class AuthActivity extends ActionBarActivity implements ActionBar.TabList
         setContentView(R.layout.auth_activity);
 
         Auth.preloadData(this);
+
+        Calendar cal = Calendar.getInstance();
+
+        Intent intent = new Intent(this, DisplayNotificationsService.class);
+        PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+// schedule for every 30 seconds
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 10800000, pintent);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -231,82 +243,12 @@ public class AuthActivity extends ActionBarActivity implements ActionBar.TabList
             final View rootView = inflater.inflate(R.layout.auth_login, container, false);
 
             final Button button = (Button)rootView.findViewById(R.id.button2);
-            final Button btn2 = (Button)rootView.findViewById(R.id.button3);
             final EditText username = (EditText)rootView.findViewById(R.id.editText5);
             final EditText password = (EditText)rootView.findViewById(R.id.editText6);
 
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                    Auth.authenticate(rootView.getContext(), username.getText().toString(), password.getText().toString());
-                }
-            });
-            btn2.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // BEGIN_INCLUDE(build_action)
-                    /** Create an intent that will be fired when the user clicks the notification.
-                     * The intent needs to be packaged into a {@link android.app.PendingIntent} so that the
-                     * notification service can fire it on our behalf.
-                     */
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://developer.android.com/reference/android/app/Notification.html"));
-                    PendingIntent pendingIntent = PendingIntent.getActivity(rootView.getContext(), 0, intent, 0);
-                    // END_INCLUDE(build_action)
-
-                    // BEGIN_INCLUDE (build_notification)
-                    /**
-                     * Use NotificationCompat.Builder to set up our notification.
-                     */
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(rootView.getContext());
-
-                    /** Set the icon that will appear in the notification bar. This icon also appears
-                     * in the lower right hand corner of the notification itself.
-                     *
-                     * Important note: although you can use any drawable as the small icon, Android
-                     * design guidelines state that the icon should be simple and monochrome. Full-color
-                     * bitmaps or busy images don't render well on smaller screens and can end up
-                     * confusing the user.
-                     */
-                    builder.setSmallIcon(R.drawable.ic_drawer);
-
-                    // Set the intent that will fire when the user taps the notification.
-                    builder.setContentIntent(pendingIntent);
-
-                    // Set the notification to auto-cancel. This means that the notification will disappear
-                    // after the user taps it, rather than remaining until it's explicitly dismissed.
-                    builder.setAutoCancel(true);
-
-                    /**
-                     *Build the notification's appearance.
-                     * Set the large icon, which appears on the left of the notification. In this
-                     * sample we'll set the large icon to be the same as our app icon. The app icon is a
-                     * reasonable default if you don't have anything more compelling to use as an icon.
-                     */
-                    builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_128));
-
-                    /**
-                     * Set the text of the notification. This sample sets the three most commononly used
-                     * text areas:
-                     * 1. The content title, which appears in large type at the top of the notification
-                     * 2. The content text, which appears in smaller text below the title
-                     * 3. The subtext, which appears under the text on newer devices. Devices running
-                     *    versions of Android prior to 4.2 will ignore this field, so don't use it for
-                     *    anything vital!
-                     */
-                    builder.setContentTitle("BasicNotifications Sample");
-                    builder.setContentText("Time to learn about notifications!");
-                    builder.setSubText("Tap to view documentation about notifications.");
-
-                    // END_INCLUDE (build_notification)
-
-                    // BEGIN_INCLUDE(send_notification)
-                    /**
-                     * Send the notification. This will immediately display the notification icon in the
-                     * notification bar.
-                     */
-                    NotificationManager notificationManager = (NotificationManager) rootView.getContext().getSystemService(
-                            NOTIFICATION_SERVICE);
-                    notificationManager.notify(0, builder.build());
-                    // END_INCLUDE(send_notification)
                 }
             });
 

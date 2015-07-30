@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="3dp">
+
+        <RelativeLayout
+            android:layout_width="385dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp">
+
+            <ImageView
+                android:id="@+id/ImageView1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#ffff00"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:text="&lt;&lt;" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Item name"
+                android:id="@+id/textView9"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="125dp"
+                android:layout_marginStart="125dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Amount"
+                android:id="@+id/textView10"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textView9"
+                android:layout_toEndOf="@+id/textView9"
+                android:layout_marginLeft="80dp"
+                android:layout_marginStart="80dp" />
+
+
+        </RelativeLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="#009900" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ListView
+            android:id="@+id/inventoryList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp" >
+
+        </ListView>
+
+    </TableRow>
+
+</LinearLayout>

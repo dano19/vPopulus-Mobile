@@ -23,6 +23,13 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+
+        <service
+            android:name="vpopulus.Other.DisplayNotificationsService"
+            android:process=":not_process"
+            android:icon="@drawable/icon_128"
+            android:label="@string/service_name" >
+        </service>
     </application>
 
 </manifest>

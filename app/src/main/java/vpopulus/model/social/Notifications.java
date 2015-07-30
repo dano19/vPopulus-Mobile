@@ -34,10 +34,11 @@ public class Notifications {
         List<Notifications> values = new ArrayList<Notifications>();
         try {
             JSONObject object = new JSONObject(json);
-            if(object.has("countries")) {
-                object = object.getJSONObject("countries");
-                if(object.has("country")) {
-                    JSONArray array = object.getJSONArray("country");
+            object = object.getJSONObject("citizen");
+            if(object.has("notifications")) {
+                object = object.getJSONObject("notifications");
+                if(object.has("notification")) {
+                    JSONArray array = object.getJSONArray("notification");
 
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject obj = array.getJSONObject(i);
@@ -48,9 +49,24 @@ public class Notifications {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Cache.notifications.addAll(values);
         return values;
+    }
+
+    public static int countUnread(String json)
+    {
+        int value = 0;
+        try {
+            JSONObject object = new JSONObject(json);
+            object = object.getJSONObject("citizen");
+            if(object.has("unread_notifications"))
+                value = object.getInt("unread_notifications");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Cache.notifications.addAll(values);
+        return value;
 
     }
+
 
 }

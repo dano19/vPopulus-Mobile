@@ -29,6 +29,7 @@ public class Finance {
         List<Finance> items = new ArrayList<Finance>();
         try {
             JSONObject object = new JSONObject(json);
+            object = object.getJSONObject("citizen");
             if(object.has("finances")) {
                 object = object.getJSONObject("finances");
                 if(object.has("finance")) {

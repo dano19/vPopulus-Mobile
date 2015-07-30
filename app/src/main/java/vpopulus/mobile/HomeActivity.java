@@ -1,6 +1,7 @@
 package vpopulus.mobile;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,9 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import vpopulus.adapters.lists.inventoryListAdapter;
+import vpopulus.adapters.lists.notificationListAdapter;
 import vpopulus.model.backend.Cache;
 import vpopulus.model.backend.DownloadImageTask;
 
@@ -55,9 +60,23 @@ public class HomeActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance(position + 1))
-                .commit();
+        switch(position) {
+            case 2:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, NotificationFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 3:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, InventoryFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            default:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                        .commit();
+                break;
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -144,7 +163,109 @@ public class HomeActivity extends ActionBarActivity
             name.setText(Cache.citizen.name.toString());
 
             ImageView avatar = (ImageView)rootView.findViewById(R.id.home_title_avatar);
-           new DownloadImageTask(avatar).execute("http://www.vpopulus.net/assets/others/avatars/citizen/7acef2b91ad8.jpg");
+           new DownloadImageTask(avatar).execute("http://www.vpopulus.net/" + Cache.citizen.avatar);
+
+            return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((HomeActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    public static class NotificationFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static NotificationFragment newInstance(int sectionNumber) {
+            NotificationFragment fragment = new NotificationFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public NotificationFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.home_notification, container, false);
+
+            ListView list;
+            notificationListAdapter adapter;
+
+            Resources res = rootView.getResources();
+            list = ( ListView )rootView.findViewById(R.id.notificationsList);  // List defined in XML ( See Below )
+            list.setAdapter(null);
+
+            adapter = new notificationListAdapter(getActivity(), res);
+            list.setAdapter(adapter);
+
+            TextView title = (TextView) rootView.findViewById(R.id.notificationsTitle);
+            title.setText("Notifications (" + Cache.notifications.size() + " / Page: " + Cache.currentPage + ")");
+
+            Button prev = (Button)rootView.findViewById(R.id.notificationsPrevPage);
+            Button next = (Button)rootView.findViewById(R.id.notificationsNextPage);
+
+            return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((HomeActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    public static class InventoryFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static InventoryFragment newInstance(int sectionNumber) {
+            InventoryFragment fragment = new InventoryFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public InventoryFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.home_inventory, container, false);
+
+            ListView list;
+            inventoryListAdapter adapter;
+
+            Resources res = rootView.getResources();
+            list = ( ListView )rootView.findViewById(R.id.inventoryList);  // List defined in XML ( See Below )
+            list.setAdapter(null);
+
+            adapter = new inventoryListAdapter(getActivity(), res);
+            list.setAdapter(adapter);
 
             return rootView;
         }

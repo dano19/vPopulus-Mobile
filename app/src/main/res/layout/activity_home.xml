@@ -8,12 +8,12 @@
     <FrameLayout android:id="@+id/container" android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-  <!--  <fragment android:id="@+id/navigation_drawer"
+    <fragment android:id="@+id/navigation_drawer"
         android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
         android:layout_gravity="start" android:name="vpopulus.mobile.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" /> -->
+        tools:layout="@layout/fragment_navigation_drawer" />
 
-    <ListView
+    <!--<ListView
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -22,7 +22,7 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.1dp"
-        android:listSelector="@drawable/navdrawer_listselector"/>
+        android:listSelector="@drawable/navdrawer_listselector"/>-->
 
 
 

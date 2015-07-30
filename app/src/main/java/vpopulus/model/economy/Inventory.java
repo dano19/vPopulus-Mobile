@@ -34,6 +34,7 @@ public class Inventory {
         List<Inventory> items = new ArrayList<Inventory>();
         try {
             JSONObject object = new JSONObject(json);
+            object = object.getJSONObject("citizen");
             if(object.has("items")) {
                 object = object.getJSONObject("items");
                 if(object.has("item")) {
